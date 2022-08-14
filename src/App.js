@@ -3,6 +3,8 @@ import React from 'react';
 import TaskList from './components/TaskList';
 
 class App extends React.Component {
+
+
     render() {
         return (
             <div className="App">
@@ -12,8 +14,8 @@ class App extends React.Component {
                 </header>
             </div>
         );
-    }
-}
+    };
+};
 
 
 export default App;
