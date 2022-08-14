@@ -8,9 +8,9 @@ class TaskList extends Component {
 
         this.state = {
             tasks: [
-                'Task 1',
-                'Task 2',
-                'Task 3',
+                { title: 'Task 1', isCompleted: false },
+                { title: 'Task 2', isCompleted: false },
+                { title: 'Task 3', isCompleted: false },
             ],
             filter: 'all',
             newTask: '',
@@ -44,8 +44,14 @@ class TaskList extends Component {
     addNewTaskHandler(e) {
         e.preventDefault();
         this.setState((state) => ({
-            tasks: [...state.tasks, state.newTask],
+            tasks: [...state.tasks, { title: state.newTask, isCompleted: false }],
             newTask: '',
+        }));
+    }
+
+    taskClickHandler(taskTitle) {
+        this.setState((state) => ({
+            tasks: state.tasks.map(x => x.title === taskTitle ? { ...x, isCompleted: !x.isCompleted } : x)
         }));
     }
 
@@ -55,7 +61,14 @@ class TaskList extends Component {
                 <h2>Current Character: {this.state.character.name}</h2>
 
                 <ul>
-                    {this.state.tasks.map(x => <TaskItem key={x} title={x} />)}
+                    {this.state.tasks.map(x =>
+                        <TaskItem
+                            key={x.title}
+                            title={x.title}
+                            isCompleted={x.isCompleted}
+                            onClick={this.taskClickHandler.bind(this)}
+                        />
+                    )}
                 </ul>
 
                 <form onSubmit={this.addNewTaskHandler.bind(this)}>
