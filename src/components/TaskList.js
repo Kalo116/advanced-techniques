@@ -18,9 +18,20 @@ class TaskList extends Component {
         this.newTaskChange = this.newTaskChange.bind(this)
     };
 
+
+
+    
     newTaskChange(e) {
         this.setState({ newTask: e.target.value });
-    };
+    }
+
+    addNewTaskHandler(e) {
+        e.preventDefault();
+        this.setState((state) => ({
+            tasks: [...state.tasks, state.newTask],
+            newTask: '',
+        }));
+    }
 
     render() {
         return (
@@ -29,7 +40,7 @@ class TaskList extends Component {
                     {this.state.tasks.map(x => <TaskItem key={x} title={x} />)}
                 </ul>
 
-                <form >
+                <form onSubmit={this.addNewTaskHandler.bind(this)}>
                     <label htmlFor="new-task"></label>
                     <input
                         type="text"
