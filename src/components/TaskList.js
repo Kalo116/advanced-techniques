@@ -15,6 +15,7 @@ class TaskList extends Component {
             filter: 'all',
             newTask: ''
         };
+        this.newTaskChange = this.newTaskChange.bind(this)
     };
 
     newTaskChange(e) {
@@ -35,7 +36,8 @@ class TaskList extends Component {
                         id="new-task"
                         name="newTask"
                         value={this.state.newTask}
-                        onChange={this.newTaskChange.bind(this)}
+                        // onChange={this.newTaskChange.bind(this)}
+                        onChange={this.newTaskChange}
                     />
 
                     <input type="submit" value="Add" />
