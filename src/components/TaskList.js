@@ -54,6 +54,11 @@ class TaskList extends Component {
             tasks: state.tasks.map(x => x.title === taskTitle ? { ...x, isCompleted: !x.isCompleted } : x)
         }));
     }
+    taskDeleteHandler = (taskTitle) => {
+        this.setState(state => ({
+            tasks: state.tasks.filter(x => x.title !== taskTitle)
+        }))
+    }
 
     render() {
         return (
@@ -67,6 +72,7 @@ class TaskList extends Component {
                             title={x.title}
                             isCompleted={x.isCompleted}
                             onClick={this.taskClickHandler.bind(this)}
+                            onDelete={this.taskDeleteHandler.bind(this)}
                         />
                     )}
                 </ul>
